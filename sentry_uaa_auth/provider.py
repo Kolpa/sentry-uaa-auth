@@ -60,6 +60,9 @@ class CFUaaProvider(OAuth2Provider):
     def get_refresh_token_url(self):
         return ACCESS_TOKEN_URL
 
+    def build_config(self, state):
+        return state
+
     def build_identity(self, state):
         data = state['data']
         token = data['access_token']
