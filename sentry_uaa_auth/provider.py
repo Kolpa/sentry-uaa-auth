@@ -30,6 +30,7 @@ class FixedOAuth2Callback(OAuth2Callback):
         req = safe_urlopen(self.access_token_url, data=data, allow_redirects=True)
         body = safe_urlread(req)
 
+        logger.warning("URL is: %s" % req.url)
         logger.warning("Body is: %s" % b64encode(body))
         return body
 
