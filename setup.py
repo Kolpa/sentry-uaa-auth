@@ -8,7 +8,6 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'sentry>=7.0.0',
-    'PyJWT>=1.5.3',
 ]
 
 tests_require = [
