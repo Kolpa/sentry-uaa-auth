@@ -16,6 +16,8 @@ import logging
 
 from base64 import b64encode
 
+from jwt import decode
+
 
 logger = logging.getLogger(__name__)
 
@@ -30,9 +32,7 @@ class FixedOAuth2Callback(OAuth2Callback):
         req = safe_urlopen(self.access_token_url, data=data, allow_redirects=True)
         body = safe_urlread(req)
 
-        logger.warning("URL is: %s" % req.url)
-        logger.warning("Body is: %s" % b64encode(body))
-        return body
+        return json.loads(body)
 
 
 class CFUaaProvider(OAuth2Provider):
@@ -62,10 +62,13 @@ class CFUaaProvider(OAuth2Provider):
 
     def build_identity(self, state):
         data = state['data']
-        user_data = state['user']
+        token = data['access_token']
+
+        user_data = decode(token, verify=False)
+
         return {
-            'id': user_data['id'],
+            'id': user_data['user_id'],
             'email': user_data['email'],
-            'name': user_data['name'],
+            'name': "%s %s" % (user_data['given_name'], user_data['family_name']),
             'data': self.get_oauth_data(data),
         }
