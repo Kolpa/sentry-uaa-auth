@@ -16,7 +16,7 @@ tests_require = [
 
 setup(
     name='sentry-uaa-auth',
-    version='0.0.1',
+    version='0.0.2',
     author='Kolya Opahle',
     author_email='kolyaopahle@gmail.com',
     url='https://www.github.com/Kolpa',
