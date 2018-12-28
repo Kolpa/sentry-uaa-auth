@@ -14,5 +14,5 @@ APP_NAME = CONF_OBJ.get('xsappname', None)
 
 SCOPE = APP_NAME + ".login"
 
-ACCESS_TOKEN_URL = '{0}/oauth/access_token'.format(BASE_DOMAIN)
+ACCESS_TOKEN_URL = '{0}/oauth/token'.format(BASE_DOMAIN)
 AUTHORIZE_URL = '{0}/oauth/authorize'.format(BASE_DOMAIN)
