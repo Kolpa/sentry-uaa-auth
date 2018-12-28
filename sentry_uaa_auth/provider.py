@@ -25,7 +25,7 @@ class FixedOAuth2Callback(OAuth2Callback):
             code=code,
             redirect_uri=absolute_uri(helper.get_redirect_url()),
         )
-        req = safe_urlopen(self.access_token_url, data=data)
+        req = safe_urlopen(self.access_token_url, data=data, allow_redirects=True)
         body = safe_urlread(req)
 
         logger.warning("Next is going to be the body: %s" % body)
