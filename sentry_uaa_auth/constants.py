@@ -1,8 +1,12 @@
 from __future__ import absolute_import, print_function
 
+from cfenv import AppEnv
 from django.conf import settings
 
-CONF_OBJ = getattr(settings, 'UAA_CONF', None)
+
+cfvEnv = AppEnv()
+
+CONF_OBJ = cfvEnv.get_service(label='xsuaa').credentials
 
 CLIENT_ID = CONF_OBJ.get('clientid', None)
 

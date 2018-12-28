@@ -8,6 +8,7 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'sentry>=7.0.0',
+    'cfenv>=0.5.3',
 ]
 
 tests_require = [
@@ -16,7 +17,7 @@ tests_require = [
 
 setup(
     name='sentry-uaa-auth',
-    version='0.1.0',
+    version='0.1.1',
     author='Kolya Opahle',
     author_email='kolyaopahle@gmail.com',
     url='https://www.github.com/Kolpa',
