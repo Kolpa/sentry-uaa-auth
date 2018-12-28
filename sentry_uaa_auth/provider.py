@@ -12,6 +12,11 @@ from .constants import (
     AUTHORIZE_URL, ACCESS_TOKEN_URL, CLIENT_ID, CLIENT_SECRET, SCOPE
 )
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 class FixedOAuth2Callback(OAuth2Callback):
     def exchange_token(self, request, helper, code):
@@ -22,8 +27,10 @@ class FixedOAuth2Callback(OAuth2Callback):
         )
         req = safe_urlopen(self.access_token_url, data=data)
         body = safe_urlread(req)
-        print(body)
-        return json.loads(body)
+
+        logger.warning("Next is going to be the body: %s" % body)
+        logger.warning(body)
+        return body
 
 
 class CFUaaProvider(OAuth2Provider):
