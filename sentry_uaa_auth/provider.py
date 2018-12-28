@@ -14,6 +14,8 @@ from .constants import (
 
 import logging
 
+from base64 import b64encode
+
 
 logger = logging.getLogger(__name__)
 
@@ -28,10 +30,7 @@ class FixedOAuth2Callback(OAuth2Callback):
         req = safe_urlopen(self.access_token_url, data=data, allow_redirects=True)
         body = safe_urlread(req)
 
-        logger.warning(req)
-
-        logger.warning("Next is going to be the body: %s" % body)
-        logger.warning(body)
+        logger.warning("Body is: %s" % b64encode(body))
         return body
 
 
