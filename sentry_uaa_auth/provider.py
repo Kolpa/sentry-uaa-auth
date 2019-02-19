@@ -22,6 +22,13 @@ from jwt import decode
 logger = logging.getLogger(__name__)
 
 
+class OAuth2LoginWithScopeCheck(OAuth2Login):
+    def dispatch(self, request, helper):
+        if 'error' in request.GET:
+            raise IdentityNotValid(request.GET['error_description'])
+        return super(OAuth2LoginWithScopeCheck, self).dispatch(request, helper)
+
+
 class FixedOAuth2Callback(OAuth2Callback):
     def exchange_token(self, request, helper, code):
         # TODO: this needs the auth yet
@@ -45,7 +52,7 @@ class CFUaaProvider(OAuth2Provider):
 
     def get_auth_pipeline(self):
         return [
-            OAuth2Login(
+            OAuth2LoginWithScopeCheck(
                 authorize_url=self.authorize_url,
                 client_id=self.client_id,
                 scope=self.scope,
