@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 class OAuth2LoginWithScopeCheck(OAuth2Login):
     def dispatch(self, request, helper):
         if 'error' in request.GET:
-            raise IdentityNotValid(request.GET['error_description'])
+            return helper.error(request.GET['error_description'])
         return super(OAuth2LoginWithScopeCheck, self).dispatch(request, helper)
 
 
